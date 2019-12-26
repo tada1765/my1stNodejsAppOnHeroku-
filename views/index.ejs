@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>amazing navbar</title>
+    <link type="text/css" href="css/styleNav1.css" rel="stylesheet">
+    
+</head>
+<body>
+
+    <nav class="menu">
+    <header>Menu <span>×</span></header>
+    <ol>
+        <li class="menu-item"><a href="/index">Home</a></li>
+        <li class="menu-item"><a href="/about">About</a></li>
+        <li class="menu-item"><a href="/more">More</a></li>
+        <li class="menu-item">
+            <a href="#0">Social Media</a>
+            <ol class="sub-menu">
+                <li class="menu-item"><a href="#0">Facebook</a></li>
+                <li class="menu-item"><a href="#0">Instagram</a></li>
+                <li class="menu-item"><a href="#0">Twitter</a></li>
+            </ol>
+        </li>
+        <li class="menu-item">
+            <a href="#0">Personal</a>
+            <ol class="sub-menu">
+                <li class="menu-item"><a href="#0">Resume</a></li>
+                <li class="menu-item"><a href="#0">Git Hub</a></li>
+                <li class="menu-item"><a href="/portfolio">Portfolio</a></li>
+            </ol>
+        </li>
+        <li class="menu-item"><a href="/contact">Contact</a></li>
+    </ol>
+    <footer><button aria-label="Toggle Menu">Toggle</button></footer>
+</nav> 
+
+<!-- <script src="test.js" ></script>  -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script>
+    
+    var $els = $('.menu a, .menu header');
+    var count = $els.length;
+    var grouplength = Math.ceil(count/3);
+    var groupNumber = 0;
+    var i = 1;
+    $('.menu').css('--count',count+'');
+    $els.each(function(j){
+        if ( i > grouplength ) {
+            groupNumber++;
+            i=1;
+        }
+        $(this).attr('data-group',groupNumber);
+        i++;
+    });
+
+    $('.menu footer button').on('click',function(e){
+        e.preventDefault();
+        $els.each(function(j){
+            $(this).css('--top',$(this)[0].getBoundingClientRect().top + ($(this).attr('data-group') * -15) - 20);
+            $(this).css('--delay-in',j*.1+'s');
+            $(this).css('--delay-out',(count-j)*.1+'s');
+        });
+        $('.menu').toggleClass('closed');
+        e.stopPropagation();
+    });
+
+    // // run animation once at beginning for demo
+    // setTimeout(function(){
+    //     $('.menu footer button').click();
+    //     setTimeout(function(){
+    //         $('.menu footer button').click();
+    //     }, (count * 100) + 500 );
+    // }, 1000); 
+</script>
+
+</body>
+</html>
